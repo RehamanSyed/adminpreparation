@@ -30,6 +30,8 @@ import {
   AlertDialogHeader,
   AlertDialogContent,
   AlertDialogOverlay,
+  Spinner,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
@@ -102,21 +104,26 @@ const TechnologyList = () => {
     // deleteonOpen();
   };
 
-  if (isLoading) return "Loading...";
+  if (isLoading) return <Spinner />;
   if (error) return "An error has occurred: " + error.message;
 
   return (
-    <Box p={10}>
-      <Flex justifyContent={"space-between"} mb={20}>
-        <Box>
-          <Heading>Technologies</Heading>
-        </Box>
-        <Box>
-          <Button colorScheme="teal" variant="outline" onClick={onOpen}>
-            Add New Technology
-          </Button>
-        </Box>
+    <Box>
+      <Flex
+        justifyContent={"space-between"}
+        alignItems={"center"}
+        p={4}
+        bg={useColorModeValue("gray.200", "gray.700")}
+        rounded={"lg"}
+        mb={10}
+      >
+        <Heading fontSize={"xl"}> All Technologies</Heading>
+
+        <Button colorScheme="teal" variant="outline" onClick={onOpen}>
+          Add New Technology
+        </Button>
       </Flex>
+
       <Container maxW={"full"}>
         <TableContainer>
           <Table variant="simple">

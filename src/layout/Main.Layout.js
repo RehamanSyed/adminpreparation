@@ -28,7 +28,7 @@ import { MdOutlineDarkMode } from "react-icons/md";
 import Link from "next/link";
 const LinkItems = [
   { name: "Home", icon: FiHome, hrefUrl: "/" },
-  { name: "Technology", icon: BsBrowserEdge, hrefUrl: "/allTechnologies" },
+  { name: "Technology", icon: BsBrowserEdge, hrefUrl: "/tech/allTechnologies" },
   { name: "React", icon: FaReact, hrefUrl: "/react/all-react-question" },
   // { name: "Html", icon: AiFillHtml5, link: "" },
   // { name: "Css", icon: BsFiletypeCss, link: "" },
@@ -69,7 +69,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
   return (
     <Box
       transition="3s ease"
-      bg={useColorModeValue("gray.800", "gray.900")}
+      bg={useColorModeValue("gray.800", "gray.700")}
       shadow={"lg"}
       w={{ base: "full", md: 60 }}
       pos="fixed"
@@ -77,11 +77,11 @@ const SidebarContent = ({ onClose, ...rest }) => {
       {...rest}
     >
       <Flex
-        h="20"
+        h="16"
         alignItems="center"
         justifyContent={{ base: "space-between", lg: "center" }}
         shadow={"lg"}
-        bg={"red.700"}
+        bg={"red.500"}
       >
         <Text fontSize="2xl" color="white" fontWeight="bold">
           Preparation
@@ -89,7 +89,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon} hrefUrl={link.hrefUrl}>
+        <NavItem key={link.name} icon={link.icon} hrefUrl={link.hrefUrl} mt={5}>
           {link.name}
         </NavItem>
       ))}
@@ -113,7 +113,7 @@ const NavItem = ({ icon, hrefUrl, children, ...rest }) => {
         cursor="pointer"
         color={"white"}
         _hover={{
-          bg: "red.600",
+          bg: "red.500",
           color: "white",
         }}
         {...rest}
@@ -121,7 +121,7 @@ const NavItem = ({ icon, hrefUrl, children, ...rest }) => {
         {icon && (
           <Icon
             mr="4"
-            fontSize="24"
+            fontSize="18"
             _groupHover={{
               color: "white",
             }}
@@ -140,9 +140,9 @@ const MobileNav = ({ onOpen, ...rest }) => {
     <Flex
       ml={{ base: 0, md: 60 }}
       px={{ base: 4, md: 4 }}
-      height="20"
+      height="16"
       alignItems="center"
-      bg={useColorModeValue("white", "gray.900")}
+      bg={useColorModeValue("white", "gray.700")}
       shadow={"lg"}
       justifyContent={{ base: "space-between", md: "flex-end" }}
       {...rest}

@@ -17,10 +17,7 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
-  ModalFooter,
   ModalBody,
-  ModalCloseButton,
   FormControl,
   FormLabel,
   Input,
@@ -31,11 +28,13 @@ import {
   AlertDialogContent,
   AlertDialogOverlay,
   Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { FaEdit, FaRegEdit, FaTrash, FaTrashAlt } from "react-icons/fa";
+import Link from "next/link";
 
 const AllReactQuestion = () => {
   const cancelRef = useRef();
@@ -115,7 +114,7 @@ const AllReactQuestion = () => {
         justifyContent={"space-between"}
         alignItems={"center"}
         p={4}
-        bg={"gray.200"}
+        bg={useColorModeValue("gray.200", "gray.700")}
         rounded={"lg"}
         mb={10}
       >
@@ -125,7 +124,7 @@ const AllReactQuestion = () => {
           as={"a"}
           colorScheme="teal"
           variant="outline"
-          href="/new-react-post"
+          href="/react/new-react-post"
           size={"md"}
         >
           Add New Post
@@ -156,7 +155,20 @@ const AllReactQuestion = () => {
                       </Text>
                     </Td>
                     <Td whiteSpace={"normal"}>
-                      <Text minW={"300px"}>{item.example}</Text>
+                      <Text minW={"300px"}>
+                        {item.example ? (
+                          <Link
+                            href={item.example}
+                            target="_blank"
+                            color={"red.700"}
+                            fontSize={12}
+                          >
+                            {item.example}
+                          </Link>
+                        ) : (
+                          "No URL"
+                        )}
+                      </Text>
                     </Td>
 
                     <Td>

@@ -66,7 +66,9 @@ const HtmlEditorComponent = ({ name }) => {
           {...field}
           onEditorChange={onChange}
           init={{
-            height: 500,
+            skin: "oxide-dark",
+            content_css: "dark",
+            height: 400,
             menubar: false,
             plugins: [
               "advlist",
@@ -151,8 +153,10 @@ export default function NewReactPost() {
         </Flex>
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)}>
-            <InputField name="question" />
-            <InputUrl name="url" />
+            <Flex gap={5}>
+              <InputField name="question" />
+              <InputUrl name="url" />
+            </Flex>
             <HtmlEditorComponent name="answer" />
 
             <Button type="submit" colorScheme="teal" mt={4}>
