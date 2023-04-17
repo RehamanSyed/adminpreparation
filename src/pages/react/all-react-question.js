@@ -35,8 +35,9 @@ import {
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import { FaEdit, FaRegEdit, FaTrash, FaTrashAlt } from "react-icons/fa";
 
-const AllTechnologyPosts = () => {
+const AllReactQuestion = () => {
   const cancelRef = useRef();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
@@ -110,64 +111,70 @@ const AllTechnologyPosts = () => {
   if (error) return "An error has occurred: " + error.message;
   return (
     <Box>
-      <Container maxW={"full"}>
-        <Flex justifyContent={"space-between"} my={10}>
-          <Box>
-            <Heading>Tech Post</Heading>
-          </Box>
-          <Box>
-            <Button
-              as={"a"}
-              colorScheme="teal"
-              variant="outline"
-              href="/tech-post/new-post"
-            >
-              Add New Post
-            </Button>
-          </Box>
-        </Flex>
+      <Flex
+        justifyContent={"space-between"}
+        alignItems={"center"}
+        p={4}
+        bg={"gray.200"}
+        rounded={"lg"}
+        mb={10}
+      >
+        <Heading fontSize={"xl"}> All React Question</Heading>
 
+        <Button
+          as={"a"}
+          colorScheme="teal"
+          variant="outline"
+          href="/new-react-post"
+          size={"md"}
+        >
+          Add New Post
+        </Button>
+      </Flex>
+      <Container maxW={"full"}>
         <TableContainer>
           <Table variant="simple">
             <Thead>
               <Tr>
                 <Th>Id</Th>
                 <Th>Question</Th>
-                <Th w={"300px"}>Answer</Th>
+                <Th>Answer</Th>
                 <Th w={"300px"}>codeSandbox URL</Th>
                 <Th textAlign={"center"}>Actions</Th>
               </Tr>
             </Thead>
             <Tbody>
               {data.map((item, idx) => {
-                console.log("typeo", typeof item.example);
+                console.log("typeo", item.example);
                 return (
                   <Tr key={idx}>
                     <Td>{idx + 1}</Td>
                     <Td>{item.question}</Td>
                     <Td whiteSpace={"normal"}>
-                      <Text minW={"300px"}>{item.example}</Text>
+                      <Text minW={"300px"} noOfLines={3}>
+                        {item.answer}
+                      </Text>
                     </Td>
                     <Td whiteSpace={"normal"}>
-                      <Text minW={"300px"}>{item.answer}</Text>
+                      <Text minW={"300px"}>{item.example}</Text>
                     </Td>
 
                     <Td>
                       <Stack
                         direction="row"
-                        spacing={4}
+                        spacing={2}
                         alignItems="center"
                         justifyContent="center"
                       >
                         <Button colorScheme="teal" variant="outline">
-                          Edit
+                          <FaEdit size={18} />
                         </Button>
                         <Button
                           colorScheme="teal"
                           variant="outline"
                           onClick={() => deleteHandler(item._id)}
                         >
-                          Delete
+                          <FaTrashAlt size={18} />
                         </Button>
                       </Stack>
                     </Td>
@@ -233,4 +240,4 @@ const AllTechnologyPosts = () => {
   );
 };
 
-export default AllTechnologyPosts;
+export default AllReactQuestion;
