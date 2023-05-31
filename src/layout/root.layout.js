@@ -38,8 +38,8 @@ const items = [
     </Link>
   ), "2", <MdPieChartOutlined />),
   getItem("Stacks", "sub1", <UserOutlined />, [
-    getItem(<Link href="/react/all-react-question">React</Link>, "3", <FaReact />),
-    getItem(<Link href="/git">Git</Link>, "4", <BsGit />),
+    getItem(<Link href="/stack/react/">React</Link>, "3", <FaReact />),
+    getItem(<Link href="/stack/git/">Git</Link>, "4", <BsGit />),
     getItem("Next Js", "5", <Fa500Px />),
   ]),
 ];

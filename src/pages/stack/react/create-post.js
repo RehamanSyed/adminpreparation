@@ -129,7 +129,6 @@ export default function NewReactPost() {
   });
   const onSubmit = (formData) => {
     console.log(formData);
-
     createMutation.mutate(formData);
   };
 
@@ -145,7 +144,7 @@ export default function NewReactPost() {
               as={"a"}
               colorScheme="teal"
               variant="outline"
-              href="/tech-post/allposts"
+              href="./"
             >
               All Post
             </Button>
