@@ -1,23 +1,29 @@
-import Head from "next/head";
-import { Box, Heading } from "@chakra-ui/react";
-import { Editor } from "@tinymce/tinymce-react";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { Col, Row } from "antd";
+import { Container } from "@chakra-ui/react";
 export default function Home() {
-  const editorRef = useRef(null);
-  const [value, setValue] = useState(
-    "<p>The quick brown fox jumps over the lazy dog</p>"
-  );
-  const [text, setText] = useState("");
-
-  function handleEditorChange(e) {
-    setContent(e.target.getContent());
-  }
-
   return (
     <>
-      <Box>
-        <Heading>React</Heading>
-      </Box>
+      <Container maxW={"container.xl"}>
+        <Row>
+          <Col span={24}>col</Col>
+        </Row>
+        <Row>
+          <Col span={12}>col-12</Col>
+          <Col span={12}>col-12</Col>
+        </Row>
+        <Row>
+          <Col span={8}>col-8</Col>
+          <Col span={8}>col-8</Col>
+          <Col span={8}>col-8</Col>
+        </Row>
+        <Row>
+          <Col span={6}>col-6</Col>
+          <Col span={6}>col-6</Col>
+          <Col span={6}>col-6</Col>
+          <Col span={6}>col-6</Col>
+        </Row>
+      </Container>
     </>
   );
 }
