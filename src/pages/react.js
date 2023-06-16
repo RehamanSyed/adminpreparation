@@ -34,7 +34,9 @@ import {
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import { getAllReactQuestion, useGetAllReactQuestion } from "@/modules/stacks/hooks/useReact";
 const ReactPage = () => {
+  const { data, isLoading, error, refetch } = useGetAllReactQuestion();
   const cancelRef = useRef();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
@@ -48,62 +50,63 @@ const ReactPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { isLoading, error, data } = useQuery({
-    queryKey: ["techData"],
-    queryFn: () =>
-      fetch("http://localhost:5000/api/v1/alltech").then((res) => res.json()),
-  });
+  
+  // const { isLoading, error, data } = useQuery({
+  //   queryKey: ["techData"],
+  //   queryFn: () =>
+  //     fetch("http://localhost:5000/api/v1/alltech").then((res) => res.json()),
+  // });
+  // const deleteMutation = useMutation({
+  //   mutationKey: ["deleteTech"],
+  //   mutationFn: async (item) => {
+  //     console.log("item data", item);
+  //     const result = await axios
+  //       .delete(`http://localhost:5000/api/v1/tech/${item}`)
+  //       .then((response) => {
+  //         console.log(response.data); // log the response data to the console
+  //       })
+  //       .catch((error) => {
+  //         console.error(error); // log any errors to the consolesdf
+  //       });
+  //     return result;
+  //   },
+  //   onSuccess: () =>
+  //     queryClient.invalidateQueries({ queryKey: ["deleteTech"] }),
+  // });
+  // const createMutation = useMutation({
+  //   mutationKey: ["createTech"],
+  //   mutationFn: async (techname) => {
+  //     const result = await axios
+  //       .post(`http://localhost:5000/api/v1/createTech`, {
+  //         technology: techname,
+  //         page: techname,
+  //       })
+  //       .then((response) => {
+  //         console.log(response.data); // log the response data to the console
+  //       })
+  //       .catch((error) => {
+  //         console.error(error); // log any errors to the console
+  //       });
+  //     return result;
+  //   },
+  //   onSuccess: () =>
+  //     queryClient.invalidateQueries({ queryKey: ["createTech"] }),
+  // });
 
-  const deleteMutation = useMutation({
-    mutationKey: ["deleteTech"],
-    mutationFn: async (item) => {
-      console.log("item data", item);
-      const result = await axios
-        .delete(`http://localhost:5000/api/v1/tech/${item}`)
-        .then((response) => {
-          console.log(response.data); // log the response data to the console
-        })
-        .catch((error) => {
-          console.error(error); // log any errors to the consolesdf
-        });
-      return result;
-    },
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: ["deleteTech"] }),
-  });
 
-  const createMutation = useMutation({
-    mutationKey: ["createTech"],
-    mutationFn: async (techname) => {
-      const result = await axios
-        .post(`http://localhost:5000/api/v1/createTech`, {
-          technology: techname,
-          page: techname,
-        })
-        .then((response) => {
-          console.log(response.data); // log the response data to the console
-        })
-        .catch((error) => {
-          console.error(error); // log any errors to the console
-        });
-      return result;
-    },
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: ["createTech"] }),
-  });
-  const onSubmit = (formData) => {
-    createMutation.mutate(formData.techname);
-    onClose();
-  };
+  // const onSubmit = (formData) => {
+  //   createMutation.mutate(formData.techname);
+  //   onClose();
+  // };
 
-  const deleteHandler = (item) => {
-    console.log(item);
-    deleteMutation.mutate(item);
-    // deleteonOpen();
-  };
+  // const deleteHandler = (item) => {
+  //   console.log(item);
+  //   deleteMutation.mutate(item);
+  //   // deleteonOpen();
+  // };
 
-  if (isLoading) return "Loading...";
-  if (error) return "An error has occurred: " + error.message;
+  // if (isLoading) return "Loading...";
+  // if (error) return "An error has occurred: " + error.message; 
 
   return (
     <Box>
@@ -118,8 +121,8 @@ const ReactPage = () => {
             </Button>
           </Box>
         </Flex>
-
-        <TableContainer>
+        {/* <Table columns={columns} dataSource={data} /> */}
+        {/* <TableContainer>
           <Table variant="simple">
             <Thead>
               <Tr>
@@ -160,9 +163,9 @@ const ReactPage = () => {
               })}
             </Tbody>
           </Table>
-        </TableContainer>
+        </TableContainer> */}
       </Container>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      {/* <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalBody p={10}>
@@ -199,7 +202,7 @@ const ReactPage = () => {
             </AlertDialogHeader>
 
             <AlertDialogBody>
-              Are you sure? You can't undo this action afterwards.
+              Are you sure? You can&apos;t undo this action afterwards.
             </AlertDialogBody>
 
             <AlertDialogFooter>
@@ -212,7 +215,7 @@ const ReactPage = () => {
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialogOverlay>
-      </AlertDialog>
+      </AlertDialog> */}
     </Box>
   );
 };

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Button, Form, Input, notification } from "antd";
-import { createStack } from "../hooks/useStack";
+import { createStack, useCreateStack } from "../hooks/useStack";
 
 const StackForm = ({ setIsModalOpen }) => {
   const [api, contextHolder] = notification.useNotification();
-  const { createMutation } = createStack();
+  const { createMutation } = useCreateStack();
   const onFinish = (formData) => {
     createMutation.mutate(formData.techname);
     setIsModalOpen(false);

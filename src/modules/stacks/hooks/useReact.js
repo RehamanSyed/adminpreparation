@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { notification } from "antd";
 
-export const getAllReactQuestion = () => {
+export const useGetAllReactQuestion = () => {  
   const { isLoading, error, data, refetch } = useQuery({
     queryKey: ["reactData"],
     queryFn: () =>
@@ -10,6 +10,8 @@ export const getAllReactQuestion = () => {
         res.json()
       ),
   });
+  console.log("use query", data);
+
   return {
     data,
     error,
@@ -17,14 +19,14 @@ export const getAllReactQuestion = () => {
     isLoading,
   };
 };
-
-export const createQuestion = () => {
+export const useCreateQuestion = () => {
   const queryClient = useQueryClient();
+  
   const createMutation = useMutation({
     mutationKey: ["createTech"],
-    mutationFn: async (techname) => {
+    mutationFunc: async (techname) => {
       const result = await axios
-        .post(`http://localhost:5000/api/v1/createTech`, {
+        .post(`http://localhost:5000/api/v1/createReactPost`, {
           technology: techname,
           page: techname,
         })
@@ -42,12 +44,12 @@ export const createQuestion = () => {
   });
   return { createMutation };
 };
-export const deleteQuestion = () => {
+export const useDeleteQuestion = () => {
   const [api, contextHolder] = notification.useNotification();
   const queryClient = useQueryClient();
   const deleteMutation = useMutation({
     mutationKey: ["deleteTech"],
-    mutationFn: async (item) => {
+    mutationFunc: async (item) => {
       console.log("item data", item);
       const result = await axios
         .delete(`http://localhost:5000/api/v1/deleteReactPost/${item}`)

@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { notification } from "antd";
 
-export const getAllStack = () => {
+export function useGetAllStack() {
   const { isLoading, error, data, refetch } = useQuery({
     queryKey: ["techData"],
     queryFn: () =>
@@ -14,8 +14,8 @@ export const getAllStack = () => {
     refetch,
     isLoading,
   };
-};
-export const createStack = () => {
+}
+export function useCreateStack() {
   const queryClient = useQueryClient();
   const createMutation = useMutation({
     mutationKey: ["createTech"],
@@ -35,12 +35,11 @@ export const createStack = () => {
 
       return result;
     },
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: ["techData"] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["techData"] }),
   });
   return { createMutation };
-};
-export const deleteStack = () => {
+}
+export function useDeleteStack() {
   const [api, contextHolder] = notification.useNotification();
   const queryClient = useQueryClient();
   const deleteMutation = useMutation({
@@ -51,7 +50,7 @@ export const deleteStack = () => {
       const result = await axios
         .delete(`http://localhost:5000/api/v1/deleteTech/${itemid}`)
         .then((response) => {
-                   api.info({
+          api.info({
             message: `Added Successfully`,
             description: "Item added",
             placement: "bottom",
@@ -68,8 +67,7 @@ export const deleteStack = () => {
         });
       return result;
     },
-    onSuccess: () =>
-    queryClient.invalidateQueries({ queryKey: ["techData"] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["techData"] }),
   });
   return { deleteMutation };
-};
+}

@@ -29,6 +29,8 @@ import Link from "next/link";
 import {
   deleteQuestion,
   getAllReactQuestion,
+  useDeleteQuestion,
+  useGetAllReactQuestion,
 } from "@/modules/stacks/hooks/useReact";
 import { Button, Space, Table } from "antd";
 
@@ -46,15 +48,16 @@ const AllReactQuestion = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { data, isLoading, error, refetch } = getAllReactQuestion();
-  const { deleteMutation } = deleteQuestion();
-  let idx = 1;
+  const { data, isLoading, error, refetch } = useGetAllReactQuestion();
+  
+  const { deleteMutation } = useDeleteQuestion();
+// console.log(data)
   const columns = [
     {
       title: "ID",
       dataIndex: "_id",
       key: "1",
-      render: (item) => <a>{item}</a>,
+      render: (item, idx) => <a key={idx}>{item}</a>,
     },
     {
       title: "Question",
@@ -113,11 +116,11 @@ const AllReactQuestion = () => {
   const deleteHandler = (item) => {
     deleteMutation.mutate(item._id);
   };
-  useEffect(() => {
-    if (data) {
-      refetch();
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) {
+  //     refetch();
+  //   }
+  // }, [data]);
 
   if (isLoading) return "Loading...";
   if (error) return "An error has occurred: " + error.message;
@@ -128,7 +131,7 @@ const AllReactQuestion = () => {
         justifyContent={"space-between"}
         alignItems={"center"}
         p={4}
-        bg={useColorModeValue("gray.200", "gray.700")}
+        bg={"gray.900"}
         rounded={"lg"}
         mb={10}
       >
@@ -136,10 +139,9 @@ const AllReactQuestion = () => {
 
         <Button
           as={"a"}
-          colorScheme="teal"
-          variant="outline"
+          type="primary"
           href="./react/create-post"
-          size={"md"}
+        
         >
           Add New Post
         </Button>

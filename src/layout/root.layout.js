@@ -45,7 +45,7 @@ const items = [
 ];
 
 const RootLayout = ({ children }) => {
-  console.log("Items",items)
+  // console.log("Items",items)
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },

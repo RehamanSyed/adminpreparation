@@ -8,11 +8,9 @@ export default function App({ Component, pageProps }) {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
-      <ChakraProvider theme={theme}>
-        <RootLayout>
-          <Component {...pageProps} />
-        </RootLayout>
-      </ChakraProvider>
+      <RootLayout>
+        <Component {...pageProps} />
+      </RootLayout>
     </QueryClientProvider>
   );
 }
