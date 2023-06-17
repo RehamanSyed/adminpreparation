@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Box, Container, Spinner } from "@chakra-ui/react";
 import { Space, Table, Button, Modal } from "antd";
 import StackForm from "@/modules/stacks/components/StackForm";
-import { useDeleteStack, useGetAllStack } from "@/modules/stacks/hooks/useStack";
+import {
+  useDeleteStack,
+  useGetAllStack,
+} from "@/modules/stacks/hooks/useStack";
+import { FiEdit, FiEdit2, FiTrash, FiTrash2 } from "react-icons/fi";
 
 const TechnologyList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,10 +35,10 @@ const TechnologyList = () => {
       dataIndex: "action",
       key: "4",
       render: (_, record, idx) => (
-        <Space size="middle" key={idx}>
-          <Button type="dashed">Edit</Button>
-          <Button type="dashed" onClick={() => deleteHandler(record)}>
-            Delete
+        <Space key={idx}>
+          <Button type="default"><FiEdit color="blue" /></Button>
+          <Button type="default"  onClick={() => deleteHandler(record)}>
+            <FiTrash2 color="red" />
           </Button>
         </Space>
       ),
@@ -49,11 +53,11 @@ const TechnologyList = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  // useEffect(() => {
-  //   if (data) {
-  //     refetch();
-  //   }
-  // }, [data]);
+  useEffect(() => {
+    if (data) {
+      refetch();
+    }
+  }, [data]);
   if (isLoading) return <Spinner />;
   if (error) return "An error has occurred: " + error.message;
 

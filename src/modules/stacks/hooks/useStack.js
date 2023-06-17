@@ -1,13 +1,17 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
+
 import { notification } from "antd";
+import { Fetcher } from "../../../../client";
 
 export function useGetAllStack() {
   const { isLoading, error, data, refetch } = useQuery({
     queryKey: ["techData"],
-    queryFn: () =>
-      fetch("http://localhost:5000/api/v1/alltech").then((res) => res.json()),
+    queryFn: async () =>
+      await Fetcher.get("alltech")
+        .then((res) => res.data)
+        .catch((error) => console.log("Error @ all tech", error)),
   });
+  console.log(data);
   return {
     data,
     error,
@@ -20,11 +24,10 @@ export function useCreateStack() {
   const createMutation = useMutation({
     mutationKey: ["createTech"],
     mutationFn: async (techname) => {
-      const result = await axios
-        .post(`http://localhost:5000/api/v1/createTech`, {
-          technology: techname,
-          page: techname,
-        })
+      const result = await Fetcher.post(`createTech`, {
+        technology: techname,
+        page: techname,
+      })
         .then((response) => {
           console.log(response.data); // log the response data to the console
         })
@@ -46,9 +49,7 @@ export function useDeleteStack() {
     mutationKey: ["deleteTech"],
     mutationFn: async (itemid) => {
       console.log("item data", itemid);
-
-      const result = await axios
-        .delete(`http://localhost:5000/api/v1/deleteTech/${itemid}`)
+      const result = await Fetcher.delete(`deleteTech/${itemid}`)
         .then((response) => {
           api.info({
             message: `Added Successfully`,
