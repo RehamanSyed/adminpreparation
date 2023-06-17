@@ -4,7 +4,8 @@ import Axios from "axios";
 // Axios.defaults.baseURL = "https://prep-api.vercel.app/api/v1/";
 
 export const Fetcher = Axios.create({
-  baseURL: "https://prep-api.vercel.app/api/v1/",});
+  baseURL: "https://prep-api.vercel.app/api/v1/",
+});
 
 export default new QueryClient({
   defaultOptions: {
